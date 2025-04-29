@@ -1,22 +1,17 @@
 <?php
-$db_server="localhost";
-$db_user="root";
-$db_password= "";
-$db_name = "web";
-$conn="";
+// database.php
 
-$conn= mysqli_connect ($db_server, $db_user,$db_password,$db_name);
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "student"; // ✅ Make sure this matches your phpMyAdmin database name
 
-if($conn)
-{
-    echo "connection established successfully";
+$conn = mysqli_connect($servername, $username, $password, $database);
+
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
 }
 
-    else{
-        echo "no connection";
-
-    }
-
+echo "Connection established successfully<br>";
 ?>
-
-
