@@ -1,25 +1,43 @@
-<?php
+<?php 
 include("database.php");
 ?>
 
-<html>
-<body>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-        Name: <input type="text" name="name">
-        Email: <input type="email" name="email">
-        <input type="submit" value="Submit">
-    </form>
 
-    <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Get the values from the form
-        $name = $_POST['name'];  // Use 'name' instead of 'NAME'
-        $email = $_POST['email'];  // Use 'email' instead of 'PASSWORD'
-        
-        // Process the form data here (e.g., save to database)
-        echo "Name: " . htmlspecialchars($name) . "<br>";
-        echo "Email: " . htmlspecialchars($email);
+<html>
+    <head>
+        <title>Fakebook</title>
+    </head>
+    <body>
+        <form action="" method="post">
+            <h1>Welcome</h1>
+            Username: <input type="text" name="username">
+            <br>
+            Password: <input type="password" name="password">
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    if (empty($username)) {
+        echo "Please enter a username.";
+    } else if (empty($password)) {
+        echo "Please enter a password.";
+    } else {
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        $sql = "INSERT INTO users (user, password) VALUES('$username', '$hash')";
+
+        if (mysqli_query($conn, $sql)) {
+            echo "New record created successfully!";
+        } else {
+            echo "Error: " . mysqli_error($conn);
+        }
     }
-    ?>
-</body>
+    mysqli_close($conn);
+}
+?>
+    </body>
 </html>
