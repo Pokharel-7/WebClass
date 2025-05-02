@@ -1,0 +1,9 @@
+<?php 
+ readfile ("abc.txt");
+
+
+
+
+
+
+?>
