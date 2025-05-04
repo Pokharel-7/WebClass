@@ -2,6 +2,7 @@
 function sayHello(){
     echo "hello wrold";
 
-}// function call
+}
+// function call
 sayHello();
 ?>
